@@ -53,26 +53,26 @@ void E()
 void F()
 {
   long long a, b, c, d, minLeft, minRight;
-  string minlName, minrName, min;
+  string minlName, minrName, minimum;
   cin >> a >> b >> c >> d;
 
-  minLeft = (a < b) ? a : b;
+  minLeft = min(a, b);
   minlName = (a < b) ? "A" : "B";
 
   if (a == b)
     minlName = "Equal";
 
-  minRight = (c < d) ? c : d;
+  minRight = min(c, d);
   minrName = (c < d) ? "C" : "D";
 
   if (c == d)
     minrName = "Equal";
 
-  min = (minLeft < minRight) ? minlName : minrName;
+  minimum = (minLeft < minRight) ? minlName : minrName;
   if (minLeft == minRight)
-    min = "Equal";
+    minimum = "Equal";
 
-  cout << min << endl;
+  cout << minimum << endl;
 }
 
 void G()
@@ -298,6 +298,15 @@ void W()
   cout << "round " << a << " / " << b << " = " << round(a / b) << endl;
 }
 
+void X()
+{
+  int a, b, c;
+
+  cin >> a >> b >> c;
+
+  cout << min(min(a, b), c) << ' ' << max(max(a, b), c) << endl;
+}
+
 int main()
 {
   /*
@@ -323,7 +332,8 @@ int main()
   T();
   U();
   V();
-  */
   W();
+  */
+  X();
   return 0;
 }
