@@ -287,6 +287,22 @@ void Z() {
   }
 }
 
+void AA() {
+  int x;
+  cin >> x;
+
+  if (x <= 25 && x >= 0)
+    cout << "Interval [0,25]" << endl;
+  else if (x <= 50 && x > 25)
+    cout << "Interval [0,25]" << endl;
+  else if (x <= 75 && x > 50)
+    cout << "Interval [0,25]" << endl;
+  else if (x <= 100 && x > 75)
+    cout << "Interval [0,25]" << endl;
+  else
+    cout << "Out of Intervals" << endl;
+}
+
 int main() {
   /*
   A();
