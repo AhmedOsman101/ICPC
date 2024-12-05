@@ -246,19 +246,61 @@ void S()
   {
     cin >> cmd;
 
-    if (cmd[0] == '+') ++x;
-    else if (cmd[0] == '-') --x;
-    else if (cmd[1] == '+') x++;
-    else if (cmd[1] == '-') x--;
+    if (cmd[0] == '+')
+      ++x;
+    else if (cmd[0] == '-')
+      --x;
+    else if (cmd[1] == '+')
+      x++;
+    else if (cmd[1] == '-')
+      x--;
   }
 
   cout << x << endl;
 }
 
+void T()
+{
+  long long N, sum = 0;
+  string A;
+  cin >> N >> A;
+
+  for (short i = 0; i < N; i++)
+  {
+    sum += stoi(string(1, A[i]));
+  }
+
+  cout << sum << endl;
+}
+
+void U()
+{
+  long long a, b, c, d;
+  cin >> a >> b >> c >> d;
+
+  cout << (pow(a, b) <= pow(c, d) ? "NO" : "YES") << endl;
+}
+
+void V()
+{
+  long long n;
+  cin >> n;
+  cout << (n * (n + 1)) / 2 << endl;
+}
+
+void W()
+{
+  double a, b;
+  cin >> a >> b;
+
+  cout << "floor " << a << " / " << b << " = " << floor(a / b) << endl;
+  cout << "ceil " << a << " / " << b << " = " << ceil(a / b) << endl;
+  cout << "round " << a << " / " << b << " = " << round(a / b) << endl;
+}
+
 int main()
 {
   /*
-
   A();
   B();
   C();
@@ -277,7 +319,11 @@ int main()
   P();
   Q();
   R();
-  */
   S();
+  T();
+  U();
+  V();
+  */
+  W();
   return 0;
 }
