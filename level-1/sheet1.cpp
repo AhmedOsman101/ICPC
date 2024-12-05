@@ -275,6 +275,18 @@ void Y() {
   cout << x.substr(x.length() - 2) << endl;
 }
 
+void Z() {
+  double n, diff;
+  cin >> n;
+  diff = n - (int)n;
+
+  if (diff == 0) {
+    cout << "int " << (int)n << endl;
+  } else {
+    cout << "float " << (int)n << ' ' << diff << endl;
+  }
+}
+
 int main() {
   /*
   A();
@@ -301,7 +313,8 @@ int main() {
   V();
   W();
   X();
-  */
   Y();
+  */
+  Z();
   return 0;
 }
