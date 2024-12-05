@@ -1,6 +1,7 @@
 #include <iomanip>
 #include <iostream>
 #include <math.h>
+#include <string>
 
 using namespace std;
 
@@ -267,6 +268,13 @@ void X() {
   cout << min(min(a, b), c) << ' ' << max(max(a, b), c) << endl;
 }
 
+void Y() {
+  int a, b, c, d;
+  cin >> a >> b >> c >> d;
+  string x = to_string(a * b * c * d);
+  cout << x.substr(x.length() - 2) << endl;
+}
+
 int main() {
   /*
   A();
@@ -292,7 +300,8 @@ int main() {
   U();
   V();
   W();
-  */
   X();
+  */
+  Y();
   return 0;
 }
