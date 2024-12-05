@@ -303,6 +303,29 @@ void AA() {
     cout << "Out of Intervals" << endl;
 }
 
+void AB() {
+  int a, b;
+  char s;
+  cin >> a >> s >> b;
+
+  switch (s) {
+  case '+':
+    cout << a + b << endl;
+    break;
+  case '-':
+    cout << a - b << endl;
+    break;
+  case '*':
+    cout << a * b << endl;
+    break;
+  case '/':
+    cout << a / b << endl;
+    break;
+  default:
+    break;
+  }
+}
+
 int main() {
   /*
   A();
@@ -331,7 +354,8 @@ int main() {
   X();
   Y();
   Z();
-  */
   AA();
+  */
+  AB();
   return 0;
 }
