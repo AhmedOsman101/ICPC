@@ -326,6 +326,24 @@ void AB() {
   }
 }
 
+void AC() {
+  int n, a, b, c, count = 0;
+  cin >> n;
+
+  for (int i = 0; i < 3; i++) {
+    cin >> a >> b >> c;
+
+    if (a + b + c >= 2)
+      count++;
+  }
+
+  cout << count << endl;
+}
+
+void AD() {
+  int
+}
+
 int main() {
   /*
   A();
@@ -355,7 +373,8 @@ int main() {
   Y();
   Z();
   AA();
-  */
   AB();
+  */
+  AC();
   return 0;
 }
