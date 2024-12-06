@@ -341,7 +341,7 @@ void AC() {
 }
 
 void AD() {
-  int
+  // code
 }
 
 int main() {
