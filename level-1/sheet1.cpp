@@ -290,29 +290,44 @@ string number_to_string(long long num) {
 void Y() {
   // long long a, b, c, d;
   // cin >> a >> b >> c >> d;
-  long long a, b, c, d;
+  unsigned long long a, b, c, d, result;
   a = pow(10, 9);
   b = pow(10, 9);
   c = pow(10, 9);
   d = pow(10, 9);
-  // To avoid dealing with huge numbers, just take modulo 100 during
-  // multiplication
-  long long result = (a % 100) * (b % 100);
-  result *= c % 100;
-  result *= d % 100;
+  a = 88888888;
+  b = 77777777;
+  c = 99999999;
+  d = 99999999;
+  // cout << "d: " << d << endl;
   /*
   a*b = 10^log⁡(a*b) = 10^(log⁡(a)+log⁡(b))
   Read more:
   https://obsidian-notes-swart.vercel.app/General/MathForProblemSolving.html#finding-mulitplication-by-logarithms
   */
-  long double total = log10(a) + log10(b) + log10(c) + log10(d);
-  total = pow(10, total);
+  long double total = log(a) + log(b) + log(c) + log(d);
+  total = exp(total);
 
-  cout << result << endl;
-  cout << total << endl;
-  string x = number_to_string(total);
-  cout << x << endl;
-  cout << (x == "0" ? "00" : (x.substr(x.length() - 2))) << endl;
+  // cout << "fmod: " << total % 100 << endl;
+  if (total == floor(total)) {
+    result = (unsigned long long)total % 100;
+    cout << "int total: " << total << endl << "int result: ";
+    cout << result << endl;
+  } else {
+    long double diff = total - floor(total);
+    cout << "float diff: " << diff << endl;
+    string tmp = to_string(diff);
+    cout << "float tmp: " << tmp << endl;
+    result = diff * pow(10, tmp.length() - 2);
+    cout << "float result1: " << result << endl;
+    result %= 100;
+    cout << "float result2: " << result << endl;
+  }
+  cout << (result == 0 ? "00" : to_string(result)) << endl;
+
+  // string x = number_to_string(total);
+  // cout << x << endl;
+  // cout << (x == "0" ? "00" : (x.substr(x.length() - 2))) << endl;
 }
 
 void Z() {
