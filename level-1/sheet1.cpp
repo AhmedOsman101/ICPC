@@ -1,6 +1,9 @@
+#include <cmath>
 #include <iomanip>
+#include <ios>
 #include <iostream>
 #include <math.h>
+#include <sstream>
 #include <string>
 
 using namespace std;
@@ -152,8 +155,9 @@ void M() {
     if (0 <= d - i) {
       d -= i;
       steps++;
-    } else
+    } else {
       i--;
+    }
   }
 
   cout << steps << endl;
@@ -242,7 +246,10 @@ void U() {
   long long a, b, c, d;
   cin >> a >> b >> c >> d;
 
-  cout << (pow(a, b) <= pow(c, d) ? "NO" : "YES") << endl;
+  double l = b * log(a);
+  double r = d * log(c);
+
+  cout << (l > r ? "YES" : "NO") << endl;
 }
 
 void V() {
@@ -268,11 +275,44 @@ void X() {
   cout << min(min(a, b), c) << ' ' << max(max(a, b), c) << endl;
 }
 
+string number_to_string(long long num) {
+  ostringstream result;
+
+  if (num == floor(num)) {
+    result << static_cast<int>(num);
+  } else {
+    result << fixed << setprecision(6) << num;
+  }
+
+  return result.str();
+}
+
 void Y() {
-  int a, b, c, d;
-  cin >> a >> b >> c >> d;
-  string x = to_string(a * b * c * d);
-  cout << x.substr(x.length() - 2) << endl;
+  // long long a, b, c, d;
+  // cin >> a >> b >> c >> d;
+  long long a, b, c, d;
+  a = pow(10, 9);
+  b = pow(10, 9);
+  c = pow(10, 9);
+  d = pow(10, 9);
+  // To avoid dealing with huge numbers, just take modulo 100 during
+  // multiplication
+  long long result = (a % 100) * (b % 100);
+  result *= c % 100;
+  result *= d % 100;
+  /*
+  a*b = 10^log⁡(a*b) = 10^(log⁡(a)+log⁡(b))
+  Read more:
+  https://obsidian-notes-swart.vercel.app/General/MathForProblemSolving.html#finding-mulitplication-by-logarithms
+  */
+  long double total = log10(a) + log10(b) + log10(c) + log10(d);
+  total = pow(10, total);
+
+  cout << result << endl;
+  cout << total << endl;
+  string x = number_to_string(total);
+  cout << x << endl;
+  cout << (x == "0" ? "00" : (x.substr(x.length() - 2))) << endl;
 }
 
 void Z() {
@@ -374,7 +414,8 @@ int main() {
   Z();
   AA();
   AB();
-  */
   AC();
+  */
+  Y();
   return 0;
 }
