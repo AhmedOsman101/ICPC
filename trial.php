@@ -2,69 +2,78 @@
 
 declare(strict_types=1);
 
-function sum_strings($a, $b): string {
-  [$a, $b] = [strrev($a), strrev($b)];
-  $res = "";
-  $len = max(strlen($a), strlen($b)) + 1;
-  $carry = 0;
-  for ($i = 0; $i < $len; $i++) {
-    // echo "S///////////////////////////////////////////////////////////////////\n";
-    $na = isset($a[$i]) ? (int) $a[$i] : 0;
-    $nb = isset($b[$i]) ? (int) $b[$i] : 0;
-    // echo "values:" . $na + $nb . " remainder:" . $carry . PHP_EOL;
-    if (($na + $nb + $carry) < 10 and !empty($carry)) {
-      $res .= $na + $nb + $carry;
-      $carry = 0;
-    } elseif (($na + $nb + $carry) >= 10 and !empty($carry)) {
-      $res .= $na + $nb + $carry - 10;
-      $carry = 1;
-    } elseif (($na + $nb) < 10 and empty($carry)) {
-      $res .= $na + $nb + $carry;
-      $carry = 0;
-    } elseif (($na + $nb) >= 10 and empty($carry)) {
-      $res .= ($na + $nb) - 10;
-      $carry = 1;
-    }
-    // echo "E///////////////////////////////////////////////////////////////////\n\n";
-  }
-  return ltrim(strrev($res), "0");
-}
-
 $n = trim(fgets(STDIN));
 $m = trim(fgets(STDIN));
 
-$final = "";
-$carry = 0;
-
-for ($i = 0; $i < strlen($m); $i++) {
+function sum_strings($n, $m): string {
+  [$n, $m] = [strrev($n), strrev($m)];
   $res = "";
-  for ($j = 0; $j < strlen($n); $j++) {
-    $step1 = (int) $m[$i] * (int) $n[$j]; // multiply the ith number of m by the jth number of n
-    if (($step1 + $carry) < 10 and $carry != 0) {
-      $res .= $step1 + $carry;
+  $len = max(strlen($n), strlen($m)) + 1;
+  $carry = 0;
+  for ($i = 0; $i < $len; $i++) {
+    $na = isset($n[$i]) ? (int) $n[$i] : 0;
+    $nb = isset($m[$i]) ? (int) $m[$i] : 0;
+    $sum = $na + $nb + $carry;
+    echo "sum:" . $sum . " carry:" . $carry . PHP_EOL;
+    if ($sum == 0) {
+      $res .= "0";
+      continue;
+    } elseif ($sum < 10) {
+      $res .= $sum;
       $carry = 0;
-    } elseif (($step1 + $carry) >= 10 and $carry != 0) {
-      if ($j == strlen($n) - 1) {
-        $res .= $step1 + $carry;
-        $carry = 0;
-      } else {
-        $step2 = ($step1 + $carry) % 10; // find the ones part
-        $carry = $step1 - $step2; // find the tens part
-        $res .= $step2; // increment the result
-      }
-    } elseif ($step1 < 10 and $carry == 0) $res .= $step1;
-    elseif ($step1 >= 10 and $carry == 0) {
-      if ($j == strlen($n) - 1) $res .= $step1;
-      else {
-        $step2 = $step1 % 10; // find the ones part
-        $carry = $step1 - $step2; // find the tens part
-        $res .= $step2; // increment the result
-      }
+    } else {
+      $res .= $sum - 10;
+      $carry = 1;
     }
   }
-  // $res = strrev($res);5
-  $res .= str_repeat(string: "0", times: $i);
-  $final = sum_strings($final, $res);
+  $res = ltrim(strrev($res), "0");
+  $res = empty($res) ? "0" : $res;
+
+  return $res;
 }
 
-var_export($final);
+function karatsuba($x, $y) {
+  if ($x < 10 || $y < 10) return $x * $y;
+
+  $n = max(strlen((string) $x), strlen((string) $y));
+  // var_dump($n);
+
+  $half_n = intdiv($n, 2);
+
+  $a = (int) substr(
+    string: (string) $x,
+    offset: 0,
+    length: $half_n
+  );
+
+  $b = (int) substr(
+    string: (string) $x,
+    offset: $half_n
+  );
+
+  $c = (int) substr(
+    string: (string) $y,
+    offset: 0,
+    length: $half_n
+  );
+
+  $d = (int) substr(
+    string: (string) $y,
+    offset: $half_n
+  );
+
+  var_dump("a: $a, b: $b, c: $c, d: $d");
+
+  $ac = karatsuba($a, $c);
+  $bd = karatsuba($b, $d);
+  $ad_bc = karatsuba($a + $b, $c + $d) - $ac - $bd;
+
+  var_dump($ac * pow(10, 2 * $half_n) + $ad_bc * pow(10, $half_n) + $bd);
+
+  return $ac * pow(10, 2 * $half_n) + $ad_bc * pow(10, $half_n) + $bd;
+}
+
+var_dump(number_format(karatsuba(999_999_999_9, 999_999_999_9)));
+
+
+// var_dump(sum_strings($n, $m));

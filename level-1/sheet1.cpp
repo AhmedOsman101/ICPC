@@ -1,9 +1,10 @@
+#include <algorithm>
 #include <cmath>
+#include <cstring>
 #include <iomanip>
 #include <ios>
 #include <iostream>
 #include <math.h>
-#include <sstream>
 #include <string>
 
 using namespace std;
@@ -275,60 +276,7 @@ void X() {
   cout << min(min(a, b), c) << ' ' << max(max(a, b), c) << endl;
 }
 
-string number_to_string(long long num) {
-  ostringstream result;
-
-  if (num == floor(num)) {
-    result << static_cast<int>(num);
-  } else {
-    result << fixed << setprecision(6) << num;
-  }
-
-  return result.str();
-}
-
-void Y() {
-  // long long a, b, c, d;
-  // cin >> a >> b >> c >> d;
-  unsigned long long a, b, c, d, result;
-  a = pow(10, 9);
-  b = pow(10, 9);
-  c = pow(10, 9);
-  d = pow(10, 9);
-  a = 88888888;
-  b = 77777777;
-  c = 99999999;
-  d = 99999999;
-  // cout << "d: " << d << endl;
-  /*
-  a*b = 10^log⁡(a*b) = 10^(log⁡(a)+log⁡(b))
-  Read more:
-  https://obsidian-notes-swart.vercel.app/General/MathForProblemSolving.html#finding-mulitplication-by-logarithms
-  */
-  long double total = log(a) + log(b) + log(c) + log(d);
-  total = exp(total);
-
-  // cout << "fmod: " << total % 100 << endl;
-  if (total == floor(total)) {
-    result = (unsigned long long)total % 100;
-    cout << "int total: " << total << endl << "int result: ";
-    cout << result << endl;
-  } else {
-    long double diff = total - floor(total);
-    cout << "float diff: " << diff << endl;
-    string tmp = to_string(diff);
-    cout << "float tmp: " << tmp << endl;
-    result = diff * pow(10, tmp.length() - 2);
-    cout << "float result1: " << result << endl;
-    result %= 100;
-    cout << "float result2: " << result << endl;
-  }
-  cout << (result == 0 ? "00" : to_string(result)) << endl;
-
-  // string x = number_to_string(total);
-  // cout << x << endl;
-  // cout << (x == "0" ? "00" : (x.substr(x.length() - 2))) << endl;
-}
+// Y() in trial.cpp
 
 void Z() {
   double n, diff;
@@ -343,7 +291,7 @@ void Z() {
 }
 
 void AA() {
-  int x;
+  float x;
   cin >> x;
 
   if (x <= 25 && x >= 0)
@@ -374,7 +322,7 @@ void AB() {
     cout << a * b << endl;
     break;
   case '/':
-    cout << a / b << endl;
+    cout << defaultfloat << ((a * 1.0) / b) << endl;
     break;
   default:
     break;
@@ -385,7 +333,7 @@ void AC() {
   int n, a, b, c, count = 0;
   cin >> n;
 
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < n; i++) {
     cin >> a >> b >> c;
 
     if (a + b + c >= 2)
@@ -396,7 +344,16 @@ void AC() {
 }
 
 void AD() {
-  // code
+  int m, n;
+  cin >> m >> n;
+  cout << floor((m * n) / 2) << endl;
+}
+
+void AE() {
+  long double m, n, a;
+  cin >> m >> n >> a;
+
+  cout << (ceil(m / a) * ceil(n / a)) << endl;
 }
 
 int main() {
@@ -425,12 +382,12 @@ int main() {
   V();
   W();
   X();
-  Y();
   Z();
   AA();
   AB();
   AC();
+  AD();
   */
-  Y();
+  AE();
   return 0;
 }
