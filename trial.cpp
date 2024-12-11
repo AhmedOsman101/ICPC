@@ -105,75 +105,8 @@ unsigned long long karatsuba(unsigned long long x, unsigned long long y) {
   return result;
 }
 
-void Y() {
-  long double a, b, c, d, result;
-  // cin >> a >> b >> c >> d;
-  // a = pow(10, 9);
-  // b = pow(10, 9);
-  // c = pow(10, 9);
-  // d = pow(10, 9);
-  a = 9999999999;
-  b = 8888888888;
-  c = 7777777777;
-  d = 6666666666;
-
-  long double total = log(a) + log(b) + log(c) + log(d);
-  total = exp(total);
-
-  if (total == floor(total)) {
-    result = static_cast<unsigned long long>(total) % 100;
-    cout << "int total: " << total << endl;
-    cout << "int result: " << result << endl;
-    cout << "fmod: " << fmod(total, 100) << endl;
-  } else {
-    long double diff = total - floor(total);
-    cout << "float diff: " << diff << endl;
-    string tmp = to_string(diff);
-    cout << "float tmp: " << tmp << endl;
-    result = diff * pow(10, tmp.length() - 2);
-    cout << "float result1: " << result << endl;
-    // result %= 100;
-    cout << "float result2: " << result << endl;
-  }
-  cout << (result == 0 ? "00" : to_string(result)) << endl;
-
-  string x = to_string(result);
-  // cout << x << endl;
-  cout << (x == "0" ? "00" : (x.substr(x.length() - 2))) << endl;
-}
-
-void test() {
-  // unsigned long long a, b, c, d;
-  // cin >> a >> b >> c >> d;
-  // unsigned long long base[4] = {a, b, c, d};
-
-  // unsigned long long result = 1;
-  // for (unsigned long long i = 0; i < 4; i++) {
-  //   base[i] %= 100;
-  //   result = (result * base[i]) % 100;
-  // }
-
-  // string x = to_string(result);
-  // if (x.length() == 1) {
-  //   cout << 0 << result << endl;
-  // } else {
-  //   cout << result << endl;
-  // }
-}
-
 int main() {
 
-  long long m, n, a;
-  cin >> m >> n >> a;
-
-  long long area1 = m * n;
-  long long area2 = pow(a, 2);
-  long power = 1;
-  while (area1 < area2 && power % 2 != 0) {
-    area2 *= power;
-    power++;
-  }
-
-  cout << power << endl;
+  
   return 0;
 }

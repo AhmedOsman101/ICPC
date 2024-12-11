@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <cmath>
+// #include <cmath>
 #include <cstring>
 #include <iomanip>
 #include <ios>
@@ -276,7 +276,24 @@ void X() {
   cout << min(min(a, b), c) << ' ' << max(max(a, b), c) << endl;
 }
 
-// Y() in trial.cpp
+void Y() {
+  unsigned long long a, b, c, d;
+  cin >> a >> b >> c >> d;
+  unsigned long long base[4] = {a, b, c, d};
+
+  unsigned long long result = 1;
+  for (unsigned long long i = 0; i < 4; i++) {
+    base[i] %= 100;
+    result = (result * base[i]) % 100;
+  }
+
+  string x = to_string(result);
+  if (x.length() == 1) {
+    cout << 0 << result << endl;
+  } else {
+    cout << result << endl;
+  }
+}
 
 void Z() {
   double n, diff;
@@ -353,7 +370,9 @@ void AE() {
   long double m, n, a;
   cin >> m >> n >> a;
 
-  cout << (ceil(m / a) * ceil(n / a)) << endl;
+  long double blocks = (ceil(m / a) * ceil(n / a));
+
+  cout << defaultfloat << setprecision(30) << blocks << endl;
 }
 
 int main() {
