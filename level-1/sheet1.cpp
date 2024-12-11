@@ -1,5 +1,5 @@
 #include <algorithm>
-// #include <cmath>
+#include <cmath>
 #include <cstdio>
 #include <cstring>
 #include <iomanip>
@@ -400,6 +400,15 @@ void AG() {
   }
 }
 
+void AH() {
+  string s, t;
+  cin >> s >> t;
+
+  reverse(t.begin(), t.end());
+
+  cout << (s == t ? "YES" : "NO") << endl;
+}
+
 int main() {
   /*
   A();
@@ -433,7 +442,8 @@ int main() {
   AD();
   AE();
   AF();
-  */
   AG();
+  */
+  AH();
   return 0;
 }
