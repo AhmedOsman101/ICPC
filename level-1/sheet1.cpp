@@ -1,5 +1,6 @@
 #include <algorithm>
 // #include <cmath>
+#include <cstdio>
 #include <cstring>
 #include <iomanip>
 #include <ios>
@@ -375,6 +376,30 @@ void AE() {
   cout << defaultfloat << setprecision(30) << blocks << endl;
 }
 
+void AF() {
+  string s;
+  cin >> s;
+
+  s[0] = s[0] > 90 ? s[0] - 32 : s[0];
+
+  cout << s << endl;
+}
+
+void AG() {
+  int t, a, b, c;
+  cin >> t;
+
+  for (int i = 0; i < t; i++) {
+    cin >> a >> b >> c;
+    if (a < b && b < c)
+      cout << "STAIR" << endl;
+    else if (a < b && b > c)
+      cout << "PEAK" << endl;
+    else
+      cout << "NONE" << endl;
+  }
+}
+
 int main() {
   /*
   A();
@@ -406,7 +431,9 @@ int main() {
   AB();
   AC();
   AD();
-  */
   AE();
+  AF();
+  */
+  AG();
   return 0;
 }
