@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <cmath>
 #include <cstdio>
 #include <cstring>
@@ -7,19 +6,25 @@
 #include <iostream>
 #include <map>
 #include <math.h>
-// #include <optional>
 #include <string>
-// #include <vector>
 
 using namespace std;
 
-unsigned long long fib (
+string strrepeat(string s, int times) {
+  string y;
+  for(int i = 1; i <= times; i++) {
+    y += s;
+  }
+  return y;
+}
+
+unsigned long long fib(
   unsigned long long n,
   map<unsigned long long, unsigned long long>& memo
 ) {
-  if (memo.count (n)) return memo[n];
+  if(memo.count(n)) return memo[n];
 
-  memo[n] = fib (n - 1, memo) + fib (n - 2, memo);
+  memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
   return memo[n];
 }
 
@@ -27,117 +32,103 @@ void A() {
   unsigned long long n;
   cin >> n;
   map<unsigned long long, unsigned long long> memo = {{1, 0}, {2, 1}};
-  for (unsigned long long i = 1; i <= n; ++i) {
-    printf ("%llu ", fib (i, memo));
+  for(unsigned long long i = 1; i <= n; ++i) {
+    printf("%llu ", fib(i, memo));
   }
-  cout << endl;
-  // fib (n, memo);
-  // for (const auto &pair : memo) {
-  //   printf ("%llu ", pair.second);
-  // }
-
-
-  // cout << endl;
+  printf("\n");
 }
 
 void B() {
-  const double PI = 3.141592653;
-  double R;
-  cin >> R;
-  cout << fixed << setprecision (9) << pow (R, 2) * PI << endl;
+  int k, s, count = 0;
+  cin >> k >> s;
+
+  for(int x = 0; x <= s; x++) {
+
+    for(int y = 0; y <= s; y++) {
+      for(int z = 0; z <= s; z++) {
+        int sum = x + y + z;
+        if(sum == s) count++;
+      }
+    }
+  }
+
+  printf("%d\n", count);
 }
 
 void C() {
-  long a, b, c, d;
-  cin >> a >> b >> c >> d;
-  cout << a * b * c * d << endl;
+  long n;
+  cin >> n;
+
+  for(int i = 1; i <= n; i++) {
+    printf("%d\n", i);
+  }
+
 }
 
 void D() {
-  string n1, n2;
-  cin >> n1 >> n2;
-  /*
-    stoi method from the string library converts strings to integers,
-    but using n1[index] returns a char data type which is not compatible with
-    stoi, so I converted it to a string using string method which accepts the
-    length of the string and the value
-  */
-  int sum = stoi (string (1, n1[n1.length() - 1])) +
-            stoi (string (1, n2[n2.length() - 1]));
-  cout << sum << endl;
+  string symbol;
+  long n, lines;
+  cin >> symbol >> lines;
+
+  for(int i = 0; i < lines; i++) {
+    cin >> n;
+    cout << strrepeat(symbol, n) << "\n";
+  }
 }
 
 void E() {
-  int k, x;
-  cin >> k >> x;
+  int n;
+  cin >> n;
 
-  string response = (k * 500 >= x) ? "Yes" : "No";
-
-  cout << response << endl;
+  for(int i = n; 0 < i; i--) {
+    cout << strrepeat("*", i) << "\n";
+  }
 }
 
 void F() {
-  long long a, b, c, d, minLeft, minRight;
-  string minlName, minrName, minimum;
-  cin >> a >> b >> c >> d;
+  int times;
+  string n;
+  cin >> times;
 
-  minLeft = min (a, b);
-  minlName = (a < b) ? "A" : "B";
-
-  if (a == b)
-    minlName = "Equal";
-
-  minRight = min (c, d);
-  minrName = (c < d) ? "C" : "D";
-
-  if (c == d)
-    minrName = "Equal";
-
-  minimum = (minLeft < minRight) ? minlName : minrName;
-  if (minLeft == minRight)
-    minimum = "Equal";
-
-  cout << minimum << endl;
+  for(int t = 1; t <= times; t++) {
+    cin >> n;
+    for(int i = n.length() - 1; 0 <= i; i--) {
+      printf("%c ", n[i]);
+    }
+    cout << "\n";
+  }
 }
 
 void G() {
-  string s;
-  int max = 0, count = 0;
-  cin >> s;
+  int size;
+  cin >> size;
 
-  for (short i = 0; i < 3; i++) {
-    if (s[i] == 'R') {
-      count++;
-      max = count;
-    } else
-      count = 0;
+  for(int i = 0; i < size; i++) {
+    int spaces = size - i - 1;
+    int stars = (2 * i) + 1;
+    cout << strrepeat(" ", spaces) << strrepeat("*", stars) << endl;
   }
 
-  cout << max << endl;
 }
 
 void H() {
-  float V, T, S, D;
-  cin >> V >> T >> S >> D;
-  float time = D / V;
-
-  cout << ( (time < T || S < time) ? "Yes" : "No") << endl;
+// code
 }
 
 void I() {
   long long n, k, half;
   cin >> n >> k;
 
-  half = ceil ( (double) n / 2);
+  half = ceil((double) n / 2);
 
-  cout << ( (k > half) ? (k - half) * 2 : (k * 2) - 1) << endl;
+  cout << ((k > half) ? (k - half) * 2 : (k * 2) - 1) << endl;
 }
 
 void J() {
   int w;
   cin >> w;
 
-  cout << ( (w % 2 == 0 && w > 2) ? "YES" : "NO") << endl;
+  cout << ((w % 2 == 0 && w > 2) ? "YES" : "NO") << endl;
 }
 
 void K() {
@@ -145,13 +136,13 @@ void K() {
   cin >> n;
   int iterations, len = n.length();
 
-  iterations = ceil ( (float) len / 2);
+  iterations = ceil((float) len / 2);
   iterations = len % 2 == 0 ? iterations : iterations - 1;
 
-  for (int i = 0; i < iterations; i++) {
+  for(int i = 0; i < iterations; i++) {
     int j = iterations * 2 - i;
 
-    if (n[i] != n[j]) {
+    if(n[i] != n[j]) {
       cout << "No" << endl;
       return;
     }
@@ -164,11 +155,11 @@ void L() {
   int A, B;
   cin >> A >> B;
 
-  if (0 < A && B == 0)
+  if(0 < A && B == 0)
     cout << "Gold" << endl;
-  else if (A == 0 && 0 < B)
+  else if(A == 0 && 0 < B)
     cout << "Silver" << endl;
-  else if (0 < A && 0 < B)
+  else if(0 < A && 0 < B)
     cout << "Alloy" << endl;
 }
 
@@ -176,8 +167,8 @@ void M() {
   int d, steps = 0, i = 5;
   cin >> d;
 
-  while (d != 0) {
-    if (0 <= d - i) {
+  while(d != 0) {
+    if(0 <= d - i) {
       d -= i;
       steps++;
     } else
@@ -191,7 +182,7 @@ void N() {
   int A, B;
   cin >> A >> B;
 
-  cout << ( (float) A / 100) * B << endl;
+  cout << ((float) A / 100) * B << endl;
 }
 
 void O() {
@@ -205,7 +196,7 @@ void P() {
   double A, B;
   cin >> A >> B;
 
-  cout << fixed << setprecision (6) << ( (A - B) / 3) + B << endl;
+  cout << fixed << setprecision(6) << ((A - B) / 3) + B << endl;
 }
 
 void Q() {
@@ -213,7 +204,7 @@ void Q() {
 
   cin >> t;
 
-  for (int i = 0; i < t; i++) {
+  for(int i = 0; i < t; i++) {
     cin >> a >> b >> c;
 
     cout << (a + b == c ? '+' : '-') << endl;
@@ -225,10 +216,10 @@ void R() {
 
   cin >> t;
 
-  for (int i = 0; i < t; i++) {
+  for(int i = 0; i < t; i++) {
     cin >> a >> b >> c;
 
-    cout << ( (a + b == c || a + c == b || b + c == a) ? "YES" : "NO") << endl;
+    cout << ((a + b == c || a + c == b || b + c == a) ? "YES" : "NO") << endl;
   }
 }
 
@@ -238,16 +229,16 @@ void S() {
 
   cin >> t;
 
-  for (int i = 0; i < t; i++) {
+  for(int i = 0; i < t; i++) {
     cin >> cmd;
 
-    if (cmd[0] == '+')
+    if(cmd[0] == '+')
       ++x;
-    else if (cmd[0] == '-')
+    else if(cmd[0] == '-')
       --x;
-    else if (cmd[1] == '+')
+    else if(cmd[1] == '+')
       x++;
-    else if (cmd[1] == '-')
+    else if(cmd[1] == '-')
       x--;
   }
 
@@ -259,8 +250,8 @@ void T() {
   string A;
   cin >> N >> A;
 
-  for (short i = 0; i < N; i++)
-    sum += stoi (string (1, A[i]));
+  for(short i = 0; i < N; i++)
+    sum += stoi(string(1, A[i]));
 
   cout << sum << endl;
 }
@@ -269,8 +260,8 @@ void U() {
   long long a, b, c, d;
   cin >> a >> b >> c >> d;
 
-  double l = b * log (a);
-  double r = d * log (c);
+  double l = b * log(a);
+  double r = d * log(c);
 
   cout << (l > r ? "YES" : "NO") << endl;
 }
@@ -285,184 +276,12 @@ void W() {
   double a, b;
   cin >> a >> b;
 
-  cout << "floor " << a << " / " << b << " = " << floor (a / b) << endl;
-  cout << "ceil " << a << " / " << b << " = " << ceil (a / b) << endl;
-  cout << "round " << a << " / " << b << " = " << round (a / b) << endl;
-}
-
-void X() {
-  int a, b, c;
-
-  cin >> a >> b >> c;
-
-  cout << min (min (a, b), c) << ' ' << max (max (a, b), c) << endl;
-}
-
-void Y() {
-  unsigned long long a, b, c, d;
-  cin >> a >> b >> c >> d;
-  unsigned long long base[4] = {a, b, c, d};
-
-  unsigned long long result = 1;
-  for (unsigned long long i = 0; i < 4; i++) {
-    base[i] %= 100;
-    result = (result * base[i]) % 100;
-  }
-
-  string x = to_string (result);
-  if (x.length() == 1)
-    cout << 0 << result << endl;
-  else
-    cout << result << endl;
-}
-
-void Z() {
-  double n, diff;
-  cin >> n;
-  diff = n - (int) n;
-
-  if (diff == 0)
-    cout << "int " << (int) n << endl;
-  else
-    cout << "float " << (int) n << ' ' << diff << endl;
-}
-
-void AA() {
-  float x;
-  cin >> x;
-
-  if (x <= 25 && x >= 0)
-    cout << "Interval [0,25]" << endl;
-  else if (x <= 50 && x > 25)
-    cout << "Interval (25,50]" << endl;
-  else if (x <= 75 && x > 50)
-    cout << "Interval (50,75]" << endl;
-  else if (x <= 100 && x > 75)
-    cout << "Interval (75,100]" << endl;
-  else
-    cout << "Out of Intervals" << endl;
-}
-
-void AB() {
-  int a, b;
-  char s;
-  cin >> a >> s >> b;
-
-  switch (s) {
-    case '+':
-      cout << a + b << endl;
-      break;
-    case '-':
-      cout << a - b << endl;
-      break;
-    case '*':
-      cout << a * b << endl;
-      break;
-    case '/':
-      cout << defaultfloat << ( (a * 1.0) / b) << endl;
-      break;
-    default:
-      break;
-  }
-}
-
-void AC() {
-  int n, a, b, c, count = 0;
-  cin >> n;
-
-  for (int i = 0; i < n; i++) {
-    cin >> a >> b >> c;
-
-    if (a + b + c >= 2)
-      count++;
-  }
-
-  cout << count << endl;
-}
-
-void AD() {
-  int m, n;
-  cin >> m >> n;
-  cout << floor ( (m * n) / 2) << endl;
-}
-
-void AE() {
-  long double m, n, a;
-  cin >> m >> n >> a;
-
-  long double blocks = (ceil (m / a) * ceil (n / a));
-
-  cout << defaultfloat << setprecision (30) << blocks << endl;
-}
-
-void AF() {
-  string s;
-  cin >> s;
-
-  s[0] = s[0] > 90 ? s[0] - 32 : s[0];
-
-  cout << s << endl;
-}
-
-void AG() {
-  int t, a, b, c;
-  cin >> t;
-
-  for (int i = 0; i < t; i++) {
-    cin >> a >> b >> c;
-    if (a < b && b < c)
-      cout << "STAIR" << endl;
-    else if (a < b && b > c)
-      cout << "PEAK" << endl;
-    else
-      cout << "NONE" << endl;
-  }
-}
-
-void AH() {
-  string s, t;
-  cin >> s >> t;
-
-  reverse (t.begin(), t.end());
-
-  cout << (s == t ? "YES" : "NO") << endl;
+  cout << "floor " << a << " / " << b << " = " << floor(a / b) << endl;
+  cout << "ceil " << a << " / " << b << " = " << ceil(a / b) << endl;
+  cout << "round " << a << " / " << b << " = " << round(a / b) << endl;
 }
 
 int main() {
-  A();
-  /*
-  B();
-  C();
-  D();
-  E();
-  F();
-  G();
-  H();
-  I();
-  J();
-  K();
-  L();
-  M();
-  N();
-  O();
-  P();
-  Q();
-  R();
-  S();
-  T();
-  U();
-  V();
-  W();
-  X();
-  Z();
-  AA();
-  AB();
-  AC();
-  AD();
-  AE();
-  AF();
-  AG();
-  AH();
-  */
+  // H();
   return 0;
 }
