@@ -115,6 +115,7 @@ void H() {
 // code
 }
 
+
 void I() {
   long long n, k, half;
   cin >> n >> k;
@@ -283,5 +284,6 @@ void W() {
 
 int main() {
   // H();
+  E();
   return 0;
 }
