@@ -1,11 +1,10 @@
-#include <cmath>
 #include <cstdio>
 #include <cstring>
 #include <iomanip>
 #include <ios>
 #include <iostream>
-#include <map>
 #include <math.h>
+#include <map>
 #include <string>
 
 using namespace std;
@@ -112,24 +111,41 @@ void G() {
 }
 
 void H() {
-// code
+  int input;
+  for(int i = 0; i < 5; i++) {
+    for(int j = 0; j < 5; j++) {
+      cin >> input;
+      if(input == 1) {
+        cout << abs(2 - i) + abs(2 - j) << endl;
+        return;
+      }
+    }
+  }
 }
-
 
 void I() {
-  long long n, k, half;
-  cin >> n >> k;
+  int count = 0, length;
+  string s;
+  cin >> length >> s;
 
-  half = ceil((double) n / 2);
-
-  cout << ((k > half) ? (k - half) * 2 : (k * 2) - 1) << endl;
+  for(int i = 0; i < length - 1; i++) {
+    if(s[i] == s[i + 1]) {
+      count++;
+    }
+  }
+  cout << count << endl;
 }
 
-void J() {
-  int w;
-  cin >> w;
 
-  cout << ((w % 2 == 0 && w > 2) ? "YES" : "NO") << endl;
+void J() {
+  int cost, balance, amount, total = 0;
+  cin >> cost >> balance >> amount;
+
+  for(int i = 1; i <= amount; i++) total += i;
+
+  total *= cost;
+
+  cout << (balance < total ? total - balance : 0) << endl;
 }
 
 void K() {
@@ -283,7 +299,6 @@ void W() {
 }
 
 int main() {
-  // H();
-  E();
+  J();
   return 0;
 }
