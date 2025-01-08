@@ -1,12 +1,7 @@
 #include <algorithm>
 #include <cmath>
-#include <cstdio>
-#include <cstring>
 #include <iomanip>
-#include <ios>
 #include <iostream>
-#include <math.h>
-#include <string>
 
 using namespace std;
 
@@ -60,17 +55,17 @@ void F() {
   minLeft = min(a, b);
   minlName = (a < b) ? "A" : "B";
 
-  if (a == b)
+  if(a == b)
     minlName = "Equal";
 
   minRight = min(c, d);
   minrName = (c < d) ? "C" : "D";
 
-  if (c == d)
+  if(c == d)
     minrName = "Equal";
 
   minimum = (minLeft < minRight) ? minlName : minrName;
-  if (minLeft == minRight)
+  if(minLeft == minRight)
     minimum = "Equal";
 
   cout << minimum << endl;
@@ -81,8 +76,8 @@ void G() {
   int max = 0, count = 0;
   cin >> s;
 
-  for (short i = 0; i < 3; i++) {
-    if (s[i] == 'R') {
+  for(short i = 0; i < 3; i++) {
+    if(s[i] == 'R') {
       count++;
       max = count;
     } else
@@ -124,10 +119,10 @@ void K() {
   iterations = ceil((float)len / 2);
   iterations = len % 2 == 0 ? iterations : iterations - 1;
 
-  for (int i = 0; i < iterations; i++) {
+  for(int i = 0; i < iterations; i++) {
     int j = iterations * 2 - i;
 
-    if (n[i] != n[j]) {
+    if(n[i] != n[j]) {
       cout << "No" << endl;
       return;
     }
@@ -140,11 +135,11 @@ void L() {
   int A, B;
   cin >> A >> B;
 
-  if (0 < A && B == 0) {
+  if(0 < A && B == 0) {
     cout << "Gold" << endl;
-  } else if (A == 0 && 0 < B) {
+  } else if(A == 0 && 0 < B) {
     cout << "Silver" << endl;
-  } else if (0 < A && 0 < B) {
+  } else if(0 < A && 0 < B) {
     cout << "Alloy" << endl;
   }
 }
@@ -153,8 +148,8 @@ void M() {
   int d, steps = 0, i = 5;
   cin >> d;
 
-  while (d != 0) {
-    if (0 <= d - i) {
+  while(d != 0) {
+    if(0 <= d - i) {
       d -= i;
       steps++;
     } else {
@@ -191,7 +186,7 @@ void Q() {
 
   cin >> t;
 
-  for (int i = 0; i < t; i++) {
+  for(int i = 0; i < t; i++) {
     cin >> a >> b >> c;
 
     cout << (a + b == c ? '+' : '-') << endl;
@@ -203,7 +198,7 @@ void R() {
 
   cin >> t;
 
-  for (int i = 0; i < t; i++) {
+  for(int i = 0; i < t; i++) {
     cin >> a >> b >> c;
 
     cout << ((a + b == c || a + c == b || b + c == a) ? "YES" : "NO") << endl;
@@ -216,16 +211,16 @@ void S() {
 
   cin >> t;
 
-  for (int i = 0; i < t; i++) {
+  for(int i = 0; i < t; i++) {
     cin >> cmd;
 
-    if (cmd[0] == '+')
+    if(cmd[0] == '+')
       ++x;
-    else if (cmd[0] == '-')
+    else if(cmd[0] == '-')
       --x;
-    else if (cmd[1] == '+')
+    else if(cmd[1] == '+')
       x++;
-    else if (cmd[1] == '-')
+    else if(cmd[1] == '-')
       x--;
   }
 
@@ -237,7 +232,7 @@ void T() {
   string A;
   cin >> N >> A;
 
-  for (short i = 0; i < N; i++) {
+  for(short i = 0; i < N; i++) {
     sum += stoi(string(1, A[i]));
   }
 
@@ -283,13 +278,13 @@ void Y() {
   unsigned long long base[4] = {a, b, c, d};
 
   unsigned long long result = 1;
-  for (unsigned long long i = 0; i < 4; i++) {
+  for(unsigned long long i = 0; i < 4; i++) {
     base[i] %= 100;
     result = (result * base[i]) % 100;
   }
 
   string x = to_string(result);
-  if (x.length() == 1) {
+  if(x.length() == 1) {
     cout << 0 << result << endl;
   } else {
     cout << result << endl;
@@ -301,7 +296,7 @@ void Z() {
   cin >> n;
   diff = n - (int)n;
 
-  if (diff == 0) {
+  if(diff == 0) {
     cout << "int " << (int)n << endl;
   } else {
     cout << "float " << (int)n << ' ' << diff << endl;
@@ -312,13 +307,13 @@ void AA() {
   float x;
   cin >> x;
 
-  if (x <= 25 && x >= 0)
+  if(x <= 25 && x >= 0)
     cout << "Interval [0,25]" << endl;
-  else if (x <= 50 && x > 25)
+  else if(x <= 50 && x > 25)
     cout << "Interval (25,50]" << endl;
-  else if (x <= 75 && x > 50)
+  else if(x <= 75 && x > 50)
     cout << "Interval (50,75]" << endl;
-  else if (x <= 100 && x > 75)
+  else if(x <= 100 && x > 75)
     cout << "Interval (75,100]" << endl;
   else
     cout << "Out of Intervals" << endl;
@@ -329,21 +324,21 @@ void AB() {
   char s;
   cin >> a >> s >> b;
 
-  switch (s) {
-  case '+':
-    cout << a + b << endl;
-    break;
-  case '-':
-    cout << a - b << endl;
-    break;
-  case '*':
-    cout << a * b << endl;
-    break;
-  case '/':
-    cout << defaultfloat << ((a * 1.0) / b) << endl;
-    break;
-  default:
-    break;
+  switch(s) {
+    case '+':
+      cout << a + b << endl;
+      break;
+    case '-':
+      cout << a - b << endl;
+      break;
+    case '*':
+      cout << a * b << endl;
+      break;
+    case '/':
+      cout << defaultfloat << ((a * 1.0) / b) << endl;
+      break;
+    default:
+      break;
   }
 }
 
@@ -351,10 +346,10 @@ void AC() {
   int n, a, b, c, count = 0;
   cin >> n;
 
-  for (int i = 0; i < n; i++) {
+  for(int i = 0; i < n; i++) {
     cin >> a >> b >> c;
 
-    if (a + b + c >= 2)
+    if(a + b + c >= 2)
       count++;
   }
 
@@ -389,11 +384,11 @@ void AG() {
   int t, a, b, c;
   cin >> t;
 
-  for (int i = 0; i < t; i++) {
+  for(int i = 0; i < t; i++) {
     cin >> a >> b >> c;
-    if (a < b && b < c)
+    if(a < b && b < c)
       cout << "STAIR" << endl;
-    else if (a < b && b > c)
+    else if(a < b && b > c)
       cout << "PEAK" << endl;
     else
       cout << "NONE" << endl;
@@ -410,40 +405,6 @@ void AH() {
 }
 
 int main() {
-  /*
-  A();
-  B();
-  C();
-  D();
-  E();
-  F();
-  G();
-  H();
-  I();
-  J();
-  K();
-  L();
-  M();
-  N();
-  O();
-  P();
-  Q();
-  R();
-  S();
-  T();
-  U();
-  V();
-  W();
-  X();
-  Z();
-  AA();
-  AB();
-  AC();
-  AD();
-  AE();
-  AF();
-  AG();
-  */
   AH();
   return 0;
 }

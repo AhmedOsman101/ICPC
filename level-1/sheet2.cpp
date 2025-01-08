@@ -1,11 +1,5 @@
-#include <cstdio>
-#include <cstring>
-#include <iomanip>
-#include <ios>
 #include <iostream>
-#include <math.h>
 #include <map>
-#include <string>
 
 using namespace std;
 
@@ -37,21 +31,49 @@ void A() {
   printf("\n");
 }
 
-void B() {
+int B() {
   int k, s, count = 0;
+  int skips = 0;
   cin >> k >> s;
 
-  for(int x = 0; x <= s; x++) {
+  if(s == 0) {
+    printf("1\n");
+    return 0;
+  }
 
-    for(int y = 0; y <= s; y++) {
-      for(int z = 0; z <= s; z++) {
+  int limit = k < s ? k : s;
+
+  for(int x = limit; 0 <= x; x--) {
+    if(limit <= skips) {
+      break;
+    }
+    for(int y = limit; 0 <= y; y--) {
+      if(skips > 0) {
+        --skips;
+        continue;
+      }
+      for(int z = 0; z <= limit; z++) {
         int sum = x + y + z;
-        if(sum == s) count++;
+        // printf("current: %i %i %i => %i, skips: %i\n", x, y, z, sum, skips);
+        if(sum - s > 0) {
+          skips = sum - s - 1;
+          // printf("too big: %i %i %i => %i\n\n", x, y, z, sum);
+          break;
+        } else if(k < s - sum - 1) {
+          skips = (s - sum) % k;
+          // printf("%i < %i => %i\n", k, s - sum, (s - sum) % k);
+          // printf("too small: %i %i %i => %i, skips: %i\n\n", x, y, z, sum, skips);
+          break;
+        } else if(sum == s) {
+          count++;
+          // printf("match: %i %i %i => %i\n\n", x, y, z, sum);
+        }
       }
     }
   }
 
   printf("%d\n", count);
+  return 0;
 }
 
 void C() {
@@ -148,157 +170,8 @@ void J() {
   cout << (balance < total ? total - balance : 0) << endl;
 }
 
-void K() {
-  string n;
-  cin >> n;
-  int iterations, len = n.length();
-
-  iterations = ceil((float) len / 2);
-  iterations = len % 2 == 0 ? iterations : iterations - 1;
-
-  for(int i = 0; i < iterations; i++) {
-    int j = iterations * 2 - i;
-
-    if(n[i] != n[j]) {
-      cout << "No" << endl;
-      return;
-    }
-  }
-
-  cout << "Yes" << endl;
-}
-
-void L() {
-  int A, B;
-  cin >> A >> B;
-
-  if(0 < A && B == 0)
-    cout << "Gold" << endl;
-  else if(A == 0 && 0 < B)
-    cout << "Silver" << endl;
-  else if(0 < A && 0 < B)
-    cout << "Alloy" << endl;
-}
-
-void M() {
-  int d, steps = 0, i = 5;
-  cin >> d;
-
-  while(d != 0) {
-    if(0 <= d - i) {
-      d -= i;
-      steps++;
-    } else
-      i--;
-  }
-
-  cout << steps << endl;
-}
-
-void N() {
-  int A, B;
-  cin >> A >> B;
-
-  cout << ((float) A / 100) * B << endl;
-}
-
-void O() {
-  int M;
-  cin >> M;
-
-  cout << (M == 0 ? 24 : 48 - M) << endl;
-}
-
-void P() {
-  double A, B;
-  cin >> A >> B;
-
-  cout << fixed << setprecision(6) << ((A - B) / 3) + B << endl;
-}
-
-void Q() {
-  int t, a, b, c;
-
-  cin >> t;
-
-  for(int i = 0; i < t; i++) {
-    cin >> a >> b >> c;
-
-    cout << (a + b == c ? '+' : '-') << endl;
-  }
-}
-
-void R() {
-  int t, a, b, c;
-
-  cin >> t;
-
-  for(int i = 0; i < t; i++) {
-    cin >> a >> b >> c;
-
-    cout << ((a + b == c || a + c == b || b + c == a) ? "YES" : "NO") << endl;
-  }
-}
-
-void S() {
-  int t, x = 0;
-  string cmd;
-
-  cin >> t;
-
-  for(int i = 0; i < t; i++) {
-    cin >> cmd;
-
-    if(cmd[0] == '+')
-      ++x;
-    else if(cmd[0] == '-')
-      --x;
-    else if(cmd[1] == '+')
-      x++;
-    else if(cmd[1] == '-')
-      x--;
-  }
-
-  cout << x << endl;
-}
-
-void T() {
-  long long N, sum = 0;
-  string A;
-  cin >> N >> A;
-
-  for(short i = 0; i < N; i++)
-    sum += stoi(string(1, A[i]));
-
-  cout << sum << endl;
-}
-
-void U() {
-  long long a, b, c, d;
-  cin >> a >> b >> c >> d;
-
-  double l = b * log(a);
-  double r = d * log(c);
-
-  cout << (l > r ? "YES" : "NO") << endl;
-}
-
-void V() {
-  long long n;
-  cin >> n;
-  cout << (n * (n + 1)) / 2 << endl;
-}
-
-void W() {
-  double a, b;
-  cin >> a >> b;
-
-  cout << "floor " << a << " / " << b << " = " << floor(a / b) << endl;
-  cout << "ceil " << a << " / " << b << " = " << ceil(a / b) << endl;
-  cout << "round " << a << " / " << b << " = " << round(a / b) << endl;
-}
 
 int main() {
-  J();
+  B();
   return 0;
 }
