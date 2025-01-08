@@ -1,6 +1,8 @@
-// #include <stdlib.h>
+#include <stdlib.h>
+// #include <math.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 void K() {
   int n, x, y, z, x_sum = 0, y_sum = 0, z_sum = 0;
@@ -96,11 +98,41 @@ void P() {
 }
 
 void Q() {
-  //
+  int n, h, w = 0, friend;
+  scanf("%i %i\n", &n, &h);
+
+  for(int i = 0; i < n; i++) {
+    scanf("%i", &friend);
+    (friend <= h) ? w++ : (w += 2);
+  }
+
+  printf("%i\n", w);
+
+}
+
+bool isUnique(int num) {
+
+  int digits[10] = {0};
+
+  while(num > 0) {
+    int digit = num % 10;
+    digits[digit]++;
+    if(digits[digit] > 1) return false;
+
+    num /= 10;
+  }
+  return true;
 }
 
 void R() {
-  //
+  int year;
+  scanf("%i", &year);
+
+  year++;
+
+  while(!isUnique(year)) year++;
+
+  printf("%i\n", year);
 }
 
 void S() {
@@ -124,6 +156,6 @@ void W() {
 }
 
 int main() {
-  P();
+  R();
   return 0;
 }
