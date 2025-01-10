@@ -5,15 +5,13 @@ using namespace std;
 
 string strrepeat(string s, int times) {
   string y;
-  for(int i = 1; i <= times; i++) {
-    y += s;
-  }
+  for(int i = 1; i <= times; i++) y += s;
   return y;
 }
 
-unsigned long long fib(
-  unsigned long long n,
-  map<unsigned long long, unsigned long long>& memo
+size_t fib(
+  size_t n,
+  map<size_t, size_t>& memo
 ) {
   if(memo.count(n)) return memo[n];
 
@@ -22,11 +20,11 @@ unsigned long long fib(
 }
 
 void A() {
-  unsigned long long n;
+  size_t n;
   cin >> n;
-  map<unsigned long long, unsigned long long> memo = {{1, 0}, {2, 1}};
-  for(unsigned long long i = 1; i <= n; ++i) {
-    printf("%llu ", fib(i, memo));
+  map<size_t, size_t> memo = {{1, 0}, {2, 1}};
+  for(size_t i = 1; i <= n; ++i) {
+    printf("%zu ", fib(i, memo));
   }
   printf("\n");
 }
@@ -172,6 +170,6 @@ void J() {
 
 
 int main() {
-  B();
+  A();
   return 0;
 }

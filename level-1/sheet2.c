@@ -28,7 +28,7 @@ void L() {
   printf("%i\n", n);
 }
 
-int M() {
+void M() {
   int count = 1;
   char str[100];
   fgets(str, sizeof(str), stdin);
@@ -36,7 +36,7 @@ int M() {
   for(size_t i = 0; i < strlen(str) - 1; i++) {
     if(count == 7) {
       printf("YES\n");
-      return 0;
+      return;
     }
 
     if(str[i] == str[i + 1]) count += 1;
@@ -44,7 +44,6 @@ int M() {
   }
 
   printf("NO\n");
-  return 0;
 }
 
 void N() {
@@ -52,7 +51,7 @@ void N() {
   char str[20];
   fgets(str, sizeof(str), stdin);
 
-  for(size_t i = 0; i < strlen(str); i++) {
+  for(int i = 0; i < strlen(str); i++) {
     if(str[i] == '4' || str[i] == '7') lucky++;
   }
 
@@ -102,7 +101,6 @@ void Q() {
 }
 
 bool isUnique(int num) {
-
   int digits[10] = {0};
 
   while(num > 0) {
@@ -126,7 +124,7 @@ void R() {
   printf("%i\n", year);
 }
 
-int S() {
+void S() {
   int n, lucky[14] = {
     4,   7,   44,  47,  74,  77,  444,
     447, 474, 477, 744, 747, 774, 777
@@ -136,14 +134,13 @@ int S() {
   for(int i = 0; i < 14; i++) {
     if(n % lucky[i] == 0) {
       printf("YES\n");
-      return 0;
+      return;
     }
   }
   printf("NO\n");
-  return 0;
 }
 
-int T() {
+void T() {
   int n, answer;
   scanf("%i", &n);
 
@@ -151,12 +148,11 @@ int T() {
     scanf("%i", &answer);
     if(answer == 1) {
       printf("HARD\n");
-      return 0;
+      return;
     }
   }
 
   printf("EASY\n");
-  return 0;
 }
 
 void U() {
@@ -170,24 +166,16 @@ void U() {
   printf("%i\n", count);
 }
 
-// void mergeSort(int arr[], size_t length) {
-//   // [4, 3, 2, 1] -> [4, 3], [2, 1] -> [3, 4], [1, 2] => [1,2,3,4]
-//   size_t middle = length / 2;
-
-// }
-
 void swap(int* a, int* b) {
-  int temp = *a; // Dereference x to get its value
-  *a = *b;       // Dereference x and assign the value of y
-  *b = temp;     // Dereference y and assign the stored value
+  int temp = *a; // Dereference `a` to get its value
+  *a = *b;       // Dereference `a` and assign the value of `b`
+  *b = temp;     // Dereference `b` and assign the stored value
 }
 
 void bubbleSort(int arr[], size_t length) {
   for(size_t i = length - 1; 0 < i; i--) {
     for(size_t j = 0; j < i; j++) {
-      if(arr[i] < arr[j]) {
-        swap(&arr[i], &arr[j]);
-      }
+      if(arr[i] < arr[j]) swap(&arr[i], &arr[j]);
     }
   }
 }
@@ -204,9 +192,11 @@ void V() {
     left = a < b ? b : a;
     right = c < d ? d : c;
 
-    if((left == arr[2] || left == arr[3]) && (right == arr[2] || right == arr[3])) {
-      printf("YES\n");
-    } else printf("NO\n");
+    bool pass = (left == arr[2] || left == arr[3])
+                && (right == arr[2] || right == arr[3]);
+
+    if(pass) printf("YES\n");
+    else printf("NO\n");
   }
 }
 
@@ -222,7 +212,6 @@ void W() {
       case 'P':
       case 'p':
         people += value;
-        printf("people: %i\n", people);
         break;
       case 'B':
       case 'b':
@@ -233,7 +222,6 @@ void W() {
           people -= value;
           seats = 0;
         }
-        printf("people: %i, seats: %i\n", people, seats);
         if(people <= 0 && 0 < seats) {
           printf("YES\n");
         } else printf("NO\n");
