@@ -1,6 +1,8 @@
 #include <cstdint>
+#include <cstdio>
 #include <iostream>
 #include <map>
+#include <string>
 
 using namespace std;
 
@@ -117,11 +119,37 @@ void H() {}
 
 void I() {}
 
-
 void J() {}
 
+int Q() {
+  int n, mid, inc = 0;
+  string s, res;
+
+  cin >> n;
+  mid = n % 2 == 0 ? (n / 2) - 1 : n / 2;
+
+  cin >> s;
+
+  if(n <= 2) {
+    cout << s << endl;
+    return 0;
+  }
+
+  res = s;
+
+  for(int i = 0; i < n - 1; i++) {
+    if(i % 2 == 0) res[mid + inc] = s[i];
+    else {
+      inc ++;
+      res[mid - inc] = s[i];
+    }
+  }
+
+  cout << res << endl;
+  return 0;
+}
 
 int main() {
-  E();
+  Q();
   return 0;
 }
