@@ -1,7 +1,10 @@
+#include <cctype>
 #include <cstdint>
 #include <cstdio>
 #include <iostream>
 #include <map>
+#include <stdbool.h>
+#include <stdio.h>
 #include <string>
 
 using namespace std;
@@ -111,11 +114,77 @@ void E() {
   cout << sum << endl;
 }
 
-void F() {}
+int F() {
+  int a, b;
+  string s;
+  scanf("%d %d\n", &a, &b);
 
-void G() {}
+  int len = a + b + 1;
 
-void H() {}
+  getline(cin, s);
+
+  if(s[a] == '-') {
+    for(int i = a + 1; i < len; i++) {
+      if(!isdigit(s[i])) {
+        cout << "No" << endl;
+        return 0;
+      }
+    }
+  } else {
+    cout << "No" << endl;
+    return 0;
+  }
+
+  cout << "Yes" << endl;
+  return 0;
+}
+
+void G() {
+  int n, count = 0;
+  bool finished = false;
+
+  cin >> n;
+
+  int arr[n];
+
+  for(int i = 0; i < n; i++) cin >> arr[i];
+
+  while(!finished) {
+    for(int i = 0; i < n; i++) {
+      /*
+        The least significant bit (LSB) of a number determines if it is even or odd.
+        read more on my blog:
+        https://obsidian-notes-swart.vercel.app/Programming/BitwiseOperations.html#_1-checking-if-a-number-is-even
+      */
+      if((arr[i] & 1) != 0) {
+        finished = true;
+        break;
+      }
+      /*
+        Each right shift halves the value of arr[i].
+        read more on my blog:
+        https://obsidian-notes-swart.vercel.app/Programming/BitwiseOperations.html#_6-dividing-a-number-by-using-right-shifts
+      */
+      else arr[i] >>= 1;
+    }
+    if(!finished) count++;
+  }
+  cout << count << endl;
+}
+
+void H() {
+  int n, prev = 0;
+  cin >> n;
+  n *= 2;
+
+  int a[n];
+  for(int i = 0; i < n; i++) cin >> a[i];
+
+  for(int i = 0; i < n; i++) prev ^= a[i]; // xor will eliminate any duplicates
+
+  // if all elements are the same it will output 0, then it's a permutation else it's not
+  cout << (prev == 0 ? "yes" : "no") << endl;
+}
 
 void I() {}
 
@@ -150,6 +219,6 @@ int Q() {
 }
 
 int main() {
-  Q();
+  H();
   return 0;
 }
